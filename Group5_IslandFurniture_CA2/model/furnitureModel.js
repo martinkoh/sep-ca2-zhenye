@@ -82,8 +82,10 @@ var furnitureDB = {
                         });
                     }
                     else {
-                        var sql = ' ';
-                        conn.query(sql, [countryId, cat], function (err, result) {
+                        var sql = 'SELECT i.ID as id, i.NAME as name, f.IMAGEURL as imageURL, i.SKU as sku, i.DESCRIPTION as description,'
+                            +' i.TYPE as type, i._LENGTH as length, i.WIDTH as width, i.HEIGHT as height, i.CATEGORY as category'
+                            +' FROM itementity i, furnitureentity f where i.ID=f.ID and i.ISDELETED=FALSE and i.CATEGORY=?;';
+                        conn.query(sql, [cat], function (err, result) {
                             if (err) {
                                 conn.end();
                                 return reject(err);
